@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <h1>Завершенные</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            {% if todos %}
+                <div class="list-group">
+                    {% for todo in todos %}
+                        <a href="{% url 'tasks' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b> - Завершена {{ todo.datecompleted|date:'d E Y г. H:m' }}</a>
+                    {% endfor %}
+                </div>
+            {% else %}
+            <div class="text-center">
+                <h2>Похоже, у тебя нет выполненных задач! :(</h2>
+            <br>
+            <a role="button" class="btn btn-primary" href="{% url 'create' %}">Добавить задачу</a>
+            </div>          
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
