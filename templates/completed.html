@@ -11,7 +11,7 @@
             {% if todos %}
                 <div class="list-group">
                     {% for todo in todos %}
-                        <a href="{% url 'tasks' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b> - Завершена {{ todo.datecompleted|date:'d E Y г. H:m' }}</a>
+                        <a href="{% url 'edit' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b> - Завершена {{ todo.date_completed|date:'d E Y г.' }}</a>
                     {% endfor %}
                 </div>
             {% else %}

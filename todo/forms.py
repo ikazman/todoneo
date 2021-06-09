@@ -3,8 +3,10 @@ from django.forms import ModelForm
 
 from .models import Todo
 
+
 class DateInput(forms.DateInput):
     input_type = 'date'
+
 
 class TodoForm(ModelForm):
     class Meta:

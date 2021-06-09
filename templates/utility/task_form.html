@@ -1,0 +1,22 @@
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="title">Заголовок</label>
+        <input type="text" name="title" class="form-control" id="title" value="{{ todo.title }}" required>
+    </div>
+    <div class="form-group">
+        <label for="memo">Описание</label>
+        <textarea name="memo" rows="5" class="form-control" id="memo" >{{ todo.memo }}</textarea>
+    </div>
+    <div class="form-group" aria-required="true">
+        <label for="id_planed_date">Дата выполнения<span class="required">*</span></label>
+        <input type="date" name="planed_date" class="form-control" required id="id_planed_date" value="{{ todo.planed_date }}">
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" name="important" class="form-check-input" id="important" {% if todo.important %}checked{% endif %}>
+        <label class="form-check-label" for="important">Важная задача</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <button type="button" class="btn btn-success" onclick="$('#complete').click()">Выполнена</button>
+    <button type="button" class="btn btn-danger" onclick="$('#delete').click()">Удалить</button>
+</form>
