@@ -1,3 +1,5 @@
+from itertools import groupby
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -26,6 +28,11 @@ def create(request):
     form = TodoForm()
     return render(request, 'create.html', {'form': form})
 
+
+@login_required
+def task_view(request, todo_pk):
+    task = get_object_or_404(Todo, pk=todo_pk, user=request.user)
+    return render(request, 'task_view.html', {'todo': task})
 
 @login_required
 def edit_task(request, todo_pk):

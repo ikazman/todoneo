@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from .models import Todo
+from .models import Project, Todo
 
 
 class DateInput(forms.DateInput):
@@ -11,11 +11,12 @@ class DateInput(forms.DateInput):
 class TodoForm(ModelForm):
     class Meta:
         model = Todo
-        fields = ['title', 'memo', 'planed_date', 'important']
+        fields = ['title', 'memo', 'planed_date', 'important', 'project']
         widgets = {
             'planed_date': DateInput(),
         }
         labels = {'title': 'Заголовок',
+                  'project': 'Проект',
                   'memo': 'Описание',
                   'planed_date': 'Дата выполнения',
                   'important': 'Важная задача'}

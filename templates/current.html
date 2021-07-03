@@ -14,8 +14,12 @@
         <div class="col-md-10">
         {% if todos %}
             <div class="list-group">
-                {% for todo in todos %}
-                    <a href="{% url 'edit' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b>{% if todo.memo %} - {{ todo.memo|truncatechars:30 }}{% endif %} | Запланировано на дату: {{ todo.planed_date|date:'d E Y г.' }}</a>
+            {% regroup todos by planed_date as tasks %}
+                {%  for pl_date in tasks %}
+                    <h5 style="margin-top: .5rem">{{ pl_date.grouper|date:'d E Y года' }}</h5>
+                        {% for todo in pl_date.list %}
+                            <a href="{% url 'edit' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b>{% if todo.memo %} - {{ todo.memo|truncatechars:30 }}{% endif %} | {{ todo.project }}</a>
+                        {% endfor %}
                 {% endfor %}
             </div>
         {% else %}
