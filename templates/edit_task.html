@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <h2>Редактировать задачу</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            {% include 'utility/task_form.html' %}
+        </div>
+    </div>
+    {% if todo.date_completed is None %}
+        <form style='display: none;' method="POST" action="{% url 'complete' todo.id %}">
+            {% csrf_token %}
+            <button id="complete" type="submit">Выполнена</button>
+        </form>
+    {% endif %}
+    <form style='display: none;' method="POST" action="{% url 'delete' todo.id %}">
+        {% csrf_token %}
+        <button id="delete" type="submit">Удалить</button>
+    </form>
+{% endblock %}
